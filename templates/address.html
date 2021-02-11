@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Welcome to Address</h1>
+            {{msg}}
+<form action="/adr/first/" method="post">
+    {% csrf_token%}
+    Address ID <input type="text" value="{{adr.id}}" name="id"> <br>
+    Enter City <input type="text" value="{{adr.city}}" name="city"> <br>
+    Enter Pin <input type="text" value="{{adr.pin}}" name="pin"><br>
+    select Employee: <select name="emp">
+    <option value="0">----Select---</option>
+        {%for emp in emplist%}
+                {% if emp.id == adr.empref.id %}
+                    <option value="{{emp.id}}" SELECTED>{{emp.name}}</option>
+                {%else%}
+                    <option value="{{emp.id}}">{{emp.name}}</option>
+                {%endif%}
+
+
+        {%endfor%}
+</select>
+    <br><br>
+
+    <input type="submit" value="Submitt">
+
+    {%if adrlist%}
+
+        <table>
+            <thead>
+            <th>Id of Address</th>
+            <th>Name of City</th>
+            <th>Pin of City</th>
+            <th>Employee</th>
+
+            <th>Edit</th>
+            <th>Delete</th>
+
+            </thead>
+            {%for adr in adrlist%}
+            <tbody>
+            <tr>
+                <td>{{adr.id}} </td>
+                <td>{{adr.city}} </td>
+                <td>{{adr.pin}} </td>
+                <td>{{adr.empref}} </td>
+
+                <td><a href="http://localhost:8000/adr/edit/{{adr.id}}">Edit</a></td>
+                <td><a href="http://localhost:8000/adr/delete/{{adr.id}}">Delete</a></td>
+
+
+            </tr>
+            </tbody>
+            {%endfor%}
+        </table>
+        {%endif%}
+</form>
+</body>
+</html>

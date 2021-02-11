@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Welcome to first Page</h1>
+            {{msg}}
+<form action="/first/" method="post">
+    {% csrf_token%}
+    Employee ID <input type="number" value="{{emp.id}}" name="id"> <br>
+    Enter Name <input type="text" value="{{emp.name}}" name="name"> <br>
+    Enter Age <input type="text" value="{{emp.age}}" name="age"><br>
+    Enter Email <input type="text" value="{{emp.email}}" name="email"><br>
+    <br><br>
+
+    <input type="submit" value="Submitt">
+
+    {%if emplist%}
+
+        <table>
+            <thead>
+            <th>Id of Employee</th>
+            <th>Name of Employee</th>
+            <th>Age of Employee</th>
+            <th>Email of Employee</th>
+            <th>Edit</th>
+            <th>Delete</th>
+
+            </thead>
+            {%for emp in emplist%}
+            <tbody>
+            <tr>
+                <td>{{emp.id}} </td>
+                <td>{{emp.name}} </td>
+                <td>{{emp.age}} </td>
+                <td>{{emp.email}} </td>
+                <td><a href="http://localhost:8000/edit/{{emp.id}}">Edit</a></td>
+                <td><a href="http://localhost:8000/delete/{{emp.id}}">Delete</a></td>
+
+
+            </tr>
+            </tbody>
+            {%endfor%}
+        </table>
+        {%endif%}
+</form>
+</body>
+</html>
